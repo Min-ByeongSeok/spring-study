@@ -16,7 +16,9 @@ public class OrderApp {
 //        MemberService memberService = new MemberServiceImpl(null);
 //        OrderService orderService = new OrderServiceImpl(null, null);
 
-        ApplicationContext applicationContext // 스프링 컨테이너
+        // ApplicationContext 를 스프링 컨테이너라 한다.
+        // ApplicationContext 는 인터페이스이다.
+        ApplicationContext applicationContext
                 = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService
                 = applicationContext.getBean("memberService", MemberService.class);
