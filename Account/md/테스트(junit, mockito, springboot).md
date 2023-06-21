@@ -21,7 +21,7 @@
   - 현재 코드의 아주 세부적인 정책들이 모두 테스트로 문서화가 된다.
   - 다음에 기능을 추가하거나 변경할때도 더 편하게 기존 기능의 영향도를 알 수 있고 안심하고 개발이 가능
 
-> 결론 : 장기적으로 볼 때 더 빠르고 안정적인 개발이 가능하게 된다.
+> 장기적으로 볼 때 더 빠르고 안정적인 개발이 가능하게 된다.
 
 ### 테스트를 잘 하려면
 - 클래스나 메소드가 SRP를 지키고 너무 크지 않아야한다.
@@ -32,3 +32,31 @@
 - Junit은 xUnit이라는 유닛테스트 프레임워크의 일환으로 java용으로 개발된 프레임워크
 - 단위테스트를 실행하고 결과를 검증해서 전체결과를 리포트해주는 프레임워크
 - 사용자가 직접 동작시킬수도 있으며 Gradle이나 Maven등을 통해 빌드하면서 테스트 가능
+
+### Mokito
+- 이름과 비슷하게 Mock를 만들어주는 라이브러리
+- 해결하고자 하는 점?
+  - 테스트하고자 하는 클래스가 의존하는 클래스를 모두 만들려다보니 테스트만들기가 어렵다
+  - 모든 클래스가 동작하다보면 어떤부분이 문제인지 알기가 어렵다.
+- 가짜(mock)을 만들어서 내가 원하는 방식으로 동작하게 하자 -> mockito 라이브러리 활용
+
+### Controller 테스트 방법
+- @SpringBootTest + @AutoConfigureMockMvc
+  - 전체 Bean을 모두 생성한 후
+  - mockMVC를 통해 http 요청과 검증을 진행
+- @WebMvcTest
+  - 내가 필요로 하는 MVC관련 Bean들만 생성
+  - Controller, ControllerAdvice, Converter, Filter, Handlerlnterceptor 등
+  - Service 등 Controller에서 의존하는 하위 레이어의 기능은 @MockBean을 통해 모킹해서 원하는 동작을 하도록 한다.(Mockito와 유사한 방식)
+  
+### Service 테스트 방법
+- 실제 로직을 처리하는 service는 다양한 테스트 기법이 필요하다.
+
+- verify
+  - 의존하고 있는 mock이 해당되는 동작을 수행했는지 확인하는 검증
+- argumentCaptor
+  - 의존하고 있는 Mock에 전달된 데이터가 내가 의도하는 데이터가 맞는지 검증
+- assertions
+  - 다양한 단언(assertions) 방법들
+- assertThrows
+  - 예외를 던지는 로직을 테스트하는 방법
