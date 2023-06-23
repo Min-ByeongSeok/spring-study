@@ -1,7 +1,6 @@
 package com.example.account.controller;
 
 import com.example.account.domain.Account;
-import com.example.account.dto.AccountDto;
 import com.example.account.dto.AccountInfo;
 import com.example.account.dto.CreateAccount;
 import com.example.account.dto.DeleteAccount;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
-    private final RedisTestService redisTestService;
+//    private final RedisTestService redisTestService;
 
     @PostMapping("/account")
     public CreateAccount.Response createAccount(@RequestBody @Valid CreateAccount.Request request) {
@@ -39,7 +38,7 @@ public class AccountController {
     }
 
     @GetMapping("/account")
-    public List<AccountInfo> getAccountsByUserId(@RequestParam("user_id") Long userId){
+    public List<AccountInfo> getAccountsByUserId(@RequestParam("user_id") Long userId) {
         return accountService.getAccountsByUserId(userId)
                 .stream().map(accountDto -> AccountInfo.builder()
                         .accountNumber(accountDto.getAccountNumber())
@@ -48,10 +47,10 @@ public class AccountController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/get-lock")
-    public String getLock() {
-        return redisTestService.getLock();
-    }
+//    @GetMapping("/get-lock")
+//    public String getLock() {
+//        return redisTestService.getLock();
+//    }
 
     @GetMapping("/account/{id}")
     public Account getAccount(@PathVariable Long id) {
