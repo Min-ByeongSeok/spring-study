@@ -29,7 +29,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
 	// json을 다루기위한 라이브러리
-//	implementation 'com.google.code.json-simple:json-simple:1.1.1'
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
 	// 컴파일 시점에만 사용
@@ -46,7 +45,9 @@ dependencies {
 	// jpa 관련 라이브러리 추가
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-
+	//swagger 관련 라이브러리 추가
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 }
 
 tasks.named('test') {

@@ -22,7 +22,8 @@ public interface DiaryRepository extends JpaRepository<Diary, Integer> {
     // 일기가 여러개일 수도 있기 때문에 날짜를 기준으로 첫번째 일기만 가져온다.
     Diary getFirstByDate(LocalDate date);
 
-    // 지정된 날짜의 모든 일기 삭제
     @Transactional
+    // 지정된 날짜의 모든 일기 삭제
     void deleteAllByDate(LocalDate date);
+
 }

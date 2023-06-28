@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // 테스트코드임을 명시하는 애노테이션
 @SpringBootTest
-// DB에 수정사항을 만들지않고 테스트를 할수 있게 만들어주는 애노테이션
+// DB에 수정사항을 만들지않고(커밋하지 않고) 테스트를 할수 있게 만들어주는 애노테이션
 @Transactional
 public class JpaMemoRepositoryTest {
 
