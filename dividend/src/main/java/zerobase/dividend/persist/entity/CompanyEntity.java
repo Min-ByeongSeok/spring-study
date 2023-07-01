@@ -1,25 +1,22 @@
-package zerobase.fund.persist.entity;
+package zerobase.dividend.persist.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import zerobase.fund.model.Company;
+import zerobase.dividend.model.Company;
 
 import javax.persistence.*;
 
-
+@Entity(name = "COMPANY")
 @Getter
 @ToString
 @NoArgsConstructor
-@Entity(name = "COMPANY")
 public class CompanyEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true) // 중복방지
     private String ticker;
 
     private String name;
