@@ -1,7 +1,9 @@
 package zerobase.fund.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 이미 구현해놓은 companyEntity를 사용하지 않고
@@ -17,10 +19,11 @@ import lombok.Data;
  * 비슷한 역할을 가지는 부분을 찾고 그 역할을 일반화해서 코드를 재사용할 수 있도록
  * 코드의 중복을 없애주는 것.
  * */
-// getter, setter 등 다양한 애노테이션을 포함된 애노테이션
-@Data
-// 디자인 패턴 중 빌더패턴을 사용하는 애노테이션
-@Builder
+
+@Data // getter, setter 등 다양한 애노테이션을 포함된 애노테이션
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder // 디자인 패턴 중 빌더패턴을 사용하는 애노테이션
 public class Company {
     private String ticker;
     private String name;

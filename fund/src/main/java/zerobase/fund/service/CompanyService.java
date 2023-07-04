@@ -1,6 +1,8 @@
 package zerobase.fund.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import zerobase.fund.model.Company;
@@ -25,13 +27,22 @@ public class CompanyService {
 
     public Company save(String ticker) {
 
-        boolean exists = this.companyRepository.existByTicker(ticker);
+        boolean exists = this.companyRepository.existsByTicker(ticker);
 
         if(exists){
             throw new RuntimeException("already exists ticker -> " + ticker);
         }
 
         return this.storeCompanyAndDividend(ticker);
+    }
+
+    // 회사를 조회하기 위한 서비스코드
+    public Page<CompanyEntity> getAllCompany(Pageable pageable){
+        return this.companyRepository.findAll(pageable);
+        // findAll 메서드를 쓰면 조회해야할 회사의 수가 많아진다면
+        // 네트워크의 대역폭도 더 많이써야하기때문에 서비스 전체에 악영향을 줄 수 있다.
+        // 또한 전체를 조회하더라도 전체를 보여줄 필요가 없을 뿐더러 전체를 보여주는 것도 힘들다
+        // 적당한 데이터의 수를 정보를 노출시키는게 여러모로 더 좋다 - > pageable(페이징 기능) 사용
     }
 
     private Company storeCompanyAndDividend(String ticker) {
