@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 @Data // getter, setter 등 다양한 애노테이션을 포함된 애노테이션
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder // 디자인 패턴 중 빌더패턴을 사용하는 애노테이션
 public class Company {
     private String ticker;
     private String name;

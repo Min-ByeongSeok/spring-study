@@ -2,6 +2,7 @@ package zerobase.fund.persist;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import zerobase.fund.persist.entity.DividendEntity;
 
 import java.time.LocalDateTime;
@@ -19,4 +20,7 @@ public interface DividendRepository extends JpaRepository<DividendEntity, Long> 
     // Company size에 비해 DividendEntity size가 훨씬 더 크다
     // 인덱스를 걸어주면 db의 성능을 향상시킬 수 있다.
     boolean existsByCompanyIdAndDate(Long companyId, LocalDateTime date);
+
+    @Transactional
+    void deleteAllByCompanyId(Long id);
 }

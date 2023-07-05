@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import zerobase.fund.exception.impl.NoCompanyException;
 import zerobase.fund.model.Company;
 import zerobase.fund.model.ScrapedResult;
 import zerobase.fund.persist.CompanyRepository;
@@ -16,6 +17,7 @@ import zerobase.fund.persist.entity.DividendEntity;
 import zerobase.fund.scraper.Scraper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,5 +97,15 @@ public class CompanyService {
         this.trie.remove(keyword);
     }
 
+    public String deleteCompany(String ticker) {
+        CompanyEntity company = this.companyRepository.findByTicker(ticker)
+                .orElseThrow(() -> new NoCompanyException());
 
+        this.dividendRepository.deleteAllByCompanyId(company.getId());
+        this.companyRepository.delete(company);
+
+        this.deleteAutocompleteKeyword(company.getName());
+
+        return company.getName();
+    }
 }
