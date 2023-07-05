@@ -1,7 +1,9 @@
 package zerobase.fund.service;
 
 import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.Trie;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -20,6 +22,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CompanyService {
 
+    // AppConfig에서 생성된 Trie Bean이 초기화될때
+    // CompanyService에 주입이 되면서 trie 인스턴스로 쓰인다.
+    private final Trie trie;
     private final Scraper yahooFinanceScraper;
 
     private final CompanyRepository companyRepository;
@@ -29,7 +34,7 @@ public class CompanyService {
 
         boolean exists = this.companyRepository.existsByTicker(ticker);
 
-        if(exists){
+        if (exists) {
             throw new RuntimeException("already exists ticker -> " + ticker);
         }
 
@@ -37,7 +42,7 @@ public class CompanyService {
     }
 
     // 회사를 조회하기 위한 서비스코드
-    public Page<CompanyEntity> getAllCompany(Pageable pageable){
+    public Page<CompanyEntity> getAllCompany(Pageable pageable) {
         return this.companyRepository.findAll(pageable);
         // findAll 메서드를 쓰면 조회해야할 회사의 수가 많아진다면
         // 네트워크의 대역폭도 더 많이써야하기때문에 서비스 전체에 악영향을 줄 수 있다.
@@ -66,4 +71,29 @@ public class CompanyService {
 
         return company;
     }
+
+    public List<String> getCompanyNamesKeyword(String keyword) {
+        Pageable limit = PageRequest.of(0, 10);
+
+        Page<CompanyEntity> companyEntities
+                = this.companyRepository.findByNameStartingWithIgnoreCase(keyword, limit);
+        return companyEntities.stream()
+                                .map(e -> e.getName())
+                                .collect(Collectors.toList());
+    }
+
+    public void addAutocompleteKeyword(String keyword) {
+        this.trie.put(keyword, null);
+    }
+
+    public List<String> autocomplete(String keyword) {
+        // 데이터가 많아지면 페이징기능을 사용하거나 개수를 줄여서(stream.limit) 가져오는편이 낫다
+        return (List<String>) this.trie.prefixMap(keyword).keySet().stream().collect(Collectors.toList());
+    }
+
+    public void deleteAutocompleteKeyword(String keyword) {
+        this.trie.remove(keyword);
+    }
+
+
 }

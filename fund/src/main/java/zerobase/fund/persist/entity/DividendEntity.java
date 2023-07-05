@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import zerobase.fund.model.Dividend;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -16,6 +13,15 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @Entity(name = "DIVIDEND")
+// 중복 데이터 저장 방지를 위한 복합 유니크키 설정
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        // 두 컬럼의 값이 동일하다면 그 데이터는 저장하지 않음
+                        columnNames = {"companyId", "date"}
+                )
+        }
+)
 public class DividendEntity {
 
     @Id
