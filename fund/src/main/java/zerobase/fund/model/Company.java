@@ -1,9 +1,6 @@
 package zerobase.fund.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * 이미 구현해놓은 companyEntity를 사용하지 않고
@@ -23,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Data // getter, setter 등 다양한 애노테이션을 포함된 애노테이션
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Company {
     private String ticker;
     private String name;

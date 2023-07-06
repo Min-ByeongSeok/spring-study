@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+import zerobase.fund.exception.impl.NoExistTickerException;
 import zerobase.fund.model.Company;
 import zerobase.fund.model.Dividend;
 import zerobase.fund.model.ScrapedResult;
@@ -88,6 +90,8 @@ public class YahooFinanceScraper implements Scraper{
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (IndexOutOfBoundsException e){
+            throw new NoExistTickerException();
         }
 
         return null;

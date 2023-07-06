@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+import zerobase.fund.exception.impl.NoExistTickerException;
 import zerobase.fund.model.Company;
 import zerobase.fund.model.constants.CacheKey;
 import zerobase.fund.persist.entity.CompanyEntity;
@@ -43,7 +44,7 @@ public class CompanyController {
     public ResponseEntity<?> addCompany(@RequestBody Company request){
         String ticker = request.getTicker().trim();
         if(ObjectUtils.isEmpty(ticker)){
-            throw new RuntimeException("tikcer is empty");
+            throw new NoExistTickerException();
         }
 
         Company company = this.companyService.save(ticker);
