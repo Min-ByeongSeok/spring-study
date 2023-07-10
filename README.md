@@ -1,1 +1,1 @@
-# study-spring-project
+# spring-study
