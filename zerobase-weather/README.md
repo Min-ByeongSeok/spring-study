@@ -1,1 +1,1 @@
-# zerobase-weather
+# 제로베이스 날씨 일기 프로젝트
