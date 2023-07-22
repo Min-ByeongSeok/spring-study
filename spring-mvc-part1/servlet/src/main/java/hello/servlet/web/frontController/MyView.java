@@ -20,12 +20,14 @@ public class MyView {
     }
 
     public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // model에 담긴 정보들을 모두 꺼내서 httpServletRequest에 setAttribute에 저장한다.
         modelToRequestAttribute(model, request);
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
         dispatcher.forward(request, response);
     }
 
     private static void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
+        // jsp는 setAttribute를 사용해서 데이터를 조회함.
         model.forEach((key, value) -> request.setAttribute(key, value));
     }
 }

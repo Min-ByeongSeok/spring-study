@@ -11,15 +11,15 @@ public class MemberRepository {
 
     private static final MemberRepository instance = new MemberRepository();
 
-    public static MemberRepository getInstance(){
+    public static MemberRepository getInstance() {
         return instance;
     }
 
-    private MemberRepository(){
+    private MemberRepository() {
 
     }
 
-    public Member save(Member member){
+    public Member save(Member member) {
         member.setId(++sequence);
         store.put(member.getId(), member);
 
@@ -30,11 +30,11 @@ public class MemberRepository {
         return store.get(id);
     }
 
-    public List<Member> findAll(){
+    public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
 
-    public void clearStore(){
+    public void clearStore() {
         store.clear();
     }
 }
