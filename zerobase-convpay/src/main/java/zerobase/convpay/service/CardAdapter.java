@@ -1,7 +1,9 @@
 package zerobase.convpay.service;
 
+import org.springframework.stereotype.Component;
 import zerobase.convpay.type.*;
 
+@Component
 public class CardAdapter implements PaymentInterface{
     // 1. 인증
     public void authorization() {

@@ -1,5 +1,6 @@
 package zerobase.convpay.service;
 
+import org.springframework.stereotype.Component;
 import zerobase.convpay.dataTransferObject.*;
 import zerobase.convpay.type.*;
 
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@Component
 // 핵심 서비스
 public class ConveniencePayService {
 
