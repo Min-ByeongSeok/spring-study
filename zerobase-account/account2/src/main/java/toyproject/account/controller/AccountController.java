@@ -1,13 +1,13 @@
 package toyproject.account.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import toyproject.account.domain.Account;
+import toyproject.account.dto.CreateAccount;
 import toyproject.account.service.AccountService;
+import toyproject.account.service.RedisTestService;
 
-import java.util.List;
+import javax.validation.Valid;
 
 /**
  * 레이어드 아키텍처는 외부에서는 컨트롤러로만 접속이 가능하고
@@ -19,17 +19,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
+    private final RedisTestService redisTestService;
 
-    @GetMapping("/create-account")
-    public String createAccount() {
-        accountService.createAccount();
+    @PostMapping("/account")
+    public CreateAccount.Response createAccount(@RequestBody @Valid CreateAccount.Request request) {
+        return CreateAccount.Response.fromDto(
+                accountService.createAccount(request.getUserId(), request.getInitialBalance())
+        );
+    }
 
-        return "success";
+    @GetMapping("/get-lock")
+    public String getLock() {
+        return redisTestService.getLock();
     }
 
     @GetMapping("/account/{id}")
     public Account getAccount(@PathVariable Long id) {
         return accountService.getAccount(id);
     }
-
 }
