@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import toyproject.account.domain.Account;
 import toyproject.account.dto.CreateAccount;
+import toyproject.account.dto.DeleteAccount;
 import toyproject.account.service.AccountService;
 import toyproject.account.service.RedisTestService;
 
@@ -25,6 +26,13 @@ public class AccountController {
     public CreateAccount.Response createAccount(@RequestBody @Valid CreateAccount.Request request) {
         return CreateAccount.Response.fromDto(
                 accountService.createAccount(request.getUserId(), request.getInitialBalance())
+        );
+    }
+
+    @DeleteMapping("/account")
+    public DeleteAccount.Response deleteAccount(@RequestBody @Valid DeleteAccount.Request request) {
+        return DeleteAccount.Response.fromDto(
+                accountService.deleteAccount(request.getUserId(), request.getAccountNumber())
         );
     }
 
