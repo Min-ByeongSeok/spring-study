@@ -2,10 +2,10 @@ package toyproject.account.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import toyproject.account.aop.AccountLock;
 import toyproject.account.dto.CancelBalance;
+import toyproject.account.dto.QueryTransactionResponse;
 import toyproject.account.dto.TransactionDto;
 import toyproject.account.dto.UseBalance;
 import toyproject.account.exception.AccountException;
@@ -25,14 +25,16 @@ import javax.validation.Valid;
 public class TransactionController {
     private final TransactionService transactionService;
 
+    @AccountLock
     @PostMapping("/transaction/use")
     public UseBalance.Response useBalance(
             @Valid @RequestBody UseBalance.Request request
-    ) {
+    ) throws InterruptedException {
         TransactionDto transactionDto
                 = transactionService.useBalance(request.getUserId(), request.getAccountNumber(), request.getAmount());
 
         try {
+            Thread.sleep(3000L);
             return UseBalance.Response.fromDto(transactionDto);
         } catch (AccountException e) {
             log.error("Failed to use balance.");
@@ -46,6 +48,7 @@ public class TransactionController {
         }
     }
 
+    @AccountLock
     @PostMapping("/transaction/cancel")
     public CancelBalance.Response cancelBalance(
             @Valid @RequestBody CancelBalance.Request request
@@ -65,5 +68,11 @@ public class TransactionController {
 
             throw e;
         }
+    }
+
+    @GetMapping("/transaction/{transactionId}")
+    public QueryTransactionResponse queryTransaction(@PathVariable String transactionId) {
+        return QueryTransactionResponse
+                .fromDto(transactionService.queryTransaction(transactionId));
     }
 }

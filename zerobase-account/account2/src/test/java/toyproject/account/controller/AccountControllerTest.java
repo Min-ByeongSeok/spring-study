@@ -14,7 +14,6 @@ import toyproject.account.dto.AccountDto;
 import toyproject.account.dto.CreateAccount;
 import toyproject.account.dto.DeleteAccount;
 import toyproject.account.service.AccountService;
-import toyproject.account.service.RedisTestService;
 import toyproject.account.type.AccountStatus;
 
 import java.time.LocalDateTime;
@@ -38,8 +37,6 @@ class AccountControllerTest {
     // mock으로 두 객체의 의존관계를 설정한다.
     @MockBean
     private AccountService accountService;
-    @MockBean
-    private RedisTestService redisTestService;
 
     // 원래는 Inject을 해줘야하는데 mockbean으로 등록하고,
     // 위에 테스트하려는 컨트롤러를 명시해주었기때문에 자동으로 주입해서 코드생략이 가능함
@@ -131,7 +128,6 @@ class AccountControllerTest {
         given(accountService.getAccountsByUserId(anyLong())).willReturn(accountDtos);
 
         // when
-
 
         // then
         mockMvc.perform(get("/account?user_id=1"))

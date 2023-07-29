@@ -7,7 +7,6 @@ import toyproject.account.dto.AccountInfo;
 import toyproject.account.dto.CreateAccount;
 import toyproject.account.dto.DeleteAccount;
 import toyproject.account.service.AccountService;
-import toyproject.account.service.RedisTestService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
-    private final RedisTestService redisTestService;
 
     @PostMapping("/account")
     public CreateAccount.Response createAccount(@RequestBody @Valid CreateAccount.Request request) {
@@ -47,11 +45,6 @@ public class AccountController {
                         .balance(accountDto.getBalance())
                         .build()
         ).collect(Collectors.toList());
-    }
-
-    @GetMapping("/get-lock")
-    public String getLock() {
-        return redisTestService.getLock();
     }
 
     @GetMapping("/account/{id}")

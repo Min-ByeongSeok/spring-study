@@ -18,12 +18,13 @@ import toyproject.account.type.TransactionResultType;
 import toyproject.account.type.TransactionType;
 
 import java.time.LocalDateTime;
-import java.time.Year;
 import java.util.Objects;
 import java.util.UUID;
 
-import static toyproject.account.type.TransactionResultType.*;
-import static toyproject.account.type.TransactionType.*;
+import static toyproject.account.type.TransactionResultType.FAIL;
+import static toyproject.account.type.TransactionResultType.SUCCESS;
+import static toyproject.account.type.TransactionType.CANCEL;
+import static toyproject.account.type.TransactionType.USE;
 
 @Slf4j
 @Service
@@ -113,5 +114,12 @@ public class TransactionService {
                 .orElseThrow(() -> new AccountException(ErrorCode.ACCOUNT_NOT_FOUND));
 
         saveAndGetTransaction(CANCEL, FAIL, account, amount);
+    }
+
+    public TransactionDto queryTransaction(String transactionId) {
+        Transaction transaction = transactionRepository.findByTransactionId(transactionId)
+                .orElseThrow(() -> new AccountException(ErrorCode.TRANSACTION_NOT_FOUND));
+
+        return TransactionDto.fromEntity(transaction);
     }
 }
