@@ -7,7 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 
-public class Signup {
+public class CustomerSignup {
     @Getter
     @Setter
     @NoArgsConstructor
@@ -35,11 +35,11 @@ public class Signup {
         private String name;
         private Role role;
 
-        public static Response fromDto(MemberDto memberDto) {
+        public static Response fromDto(CustomerDto customerDto) {
             return Response.builder()
-                    .name(memberDto.getName())
-                    .userId(memberDto.getUserId())
-                    .role(memberDto.getRole())
+                    .name(customerDto.getName())
+                    .userId(customerDto.getUserId())
+                    .role(customerDto.getRole())
                     .build();
         }
     }

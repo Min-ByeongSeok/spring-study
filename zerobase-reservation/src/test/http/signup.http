@@ -2,9 +2,9 @@ POST http://localhost:8080/signup
 Content-Type: application/json
 
 {
-  "userId": "zerobase",
-  "password": "1234",
   "name": "hi",
+  "userId": "zerobaseId",
+  "password": "1234",
   "role": "CUSTOMER"
 }
 

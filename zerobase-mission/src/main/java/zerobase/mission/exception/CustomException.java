@@ -1,18 +1,18 @@
-package zerobase.reservation.exception;
+package zerobase.mission.exception;
 
 import lombok.*;
-import zerobase.reservation.type.ErrorCode;
+import zerobase.mission.type.ErrorCode;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SignupException extends RuntimeException {
+public class CustomException extends RuntimeException {
     private ErrorCode errorCode;
     private String errorMessage;
 
-    public SignupException(ErrorCode errorCode) {
+    public CustomException(ErrorCode errorCode) {
         this.errorCode = errorCode;
         this.errorMessage = errorCode.getDescription();
     }

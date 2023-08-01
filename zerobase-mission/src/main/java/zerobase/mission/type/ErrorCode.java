@@ -1,4 +1,4 @@
-package zerobase.reservation.type;
+package zerobase.mission.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
