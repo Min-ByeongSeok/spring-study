@@ -1,15 +1,13 @@
 package zerobase.mission.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import zerobase.mission.domain.Store;
 import zerobase.mission.dto.RegisterStoreDto;
 import zerobase.mission.dto.StoreDto;
-import zerobase.mission.service.RegisterService;
+import zerobase.mission.service.RegisterStoreService;
 
 import javax.validation.Valid;
 
@@ -17,12 +15,12 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class RegisterController {
 
-    private final RegisterService registerService;
+    private final RegisterStoreService registerStoreService;
 
     @PostMapping("/register/store")
     public RegisterStoreDto.Response registerStore(@RequestBody @Valid RegisterStoreDto.Request request) {
 
-        StoreDto storeDto = registerService.registerStore(Store.builder()
+        StoreDto storeDto = registerStoreService.registerStore(Store.builder()
                 .name(request.getName())
                 .address(request.getAddress())
                 .description(request.getDescription())

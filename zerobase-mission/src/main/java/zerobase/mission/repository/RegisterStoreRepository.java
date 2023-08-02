@@ -6,7 +6,7 @@ import zerobase.mission.domain.Address;
 import zerobase.mission.domain.Store;
 
 @Repository
-public interface RegisteredStoreRepository extends JpaRepository<Store, Long> {
+public interface RegisterStoreRepository extends JpaRepository<Store, Long> {
     boolean existsByNameAndAddress(String name, Address address);
 
 }

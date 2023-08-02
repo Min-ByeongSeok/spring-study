@@ -1,10 +1,8 @@
 package zerobase.mission.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,11 +12,9 @@ import zerobase.mission.domain.Address;
 import zerobase.mission.domain.Store;
 import zerobase.mission.dto.RegisterStoreDto;
 import zerobase.mission.dto.StoreDto;
-import zerobase.mission.service.RegisterService;
+import zerobase.mission.service.RegisterStoreService;
 
 import java.time.LocalTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -32,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class RegisterControllerTest {
 
     @MockBean
-    private RegisterService registerService;
+    private RegisterStoreService registerStoreService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -58,8 +54,7 @@ class RegisterControllerTest {
                 .closeTime(LocalTime.of(18, 0, 0))
                 .build();
 
-
-        given(registerService.registerStore(any())).willReturn(
+        given(registerStoreService.registerStore(any())).willReturn(
                 StoreDto.builder()
                         .name(crongStore.getName())
                         .isRegistered(true)
@@ -71,7 +66,7 @@ class RegisterControllerTest {
                         .content(objectMapper.writeValueAsString(
                                 new RegisterStoreDto.Request(
                                         "crongStore",
-                                        new Address("bbo-rong", "bbo-rong", "123"),
+                                        address,
                                         "hi this is crong's store",
                                         LocalTime.of(9, 0, 0),
                                         LocalTime.of(18, 0, 0))

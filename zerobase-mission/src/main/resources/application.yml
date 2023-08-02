@@ -5,10 +5,13 @@ spring:
     username: root
     password: 1234
 
+  sql:
+    init:
+      mode: always
+
   jpa:
     defer-datasource-initialization: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    encoding:
     hibernate:
       ddl-auto: create-drop
     open-in-view: false
