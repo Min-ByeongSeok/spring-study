@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import zerobase.mission.domain.member.Customer;
 import zerobase.mission.dto.CustomerDto;
-import zerobase.mission.dto.CustomerSignupDto;
+import zerobase.mission.dto.SignupCustomerDto;
 import zerobase.mission.service.CustomerService;
 import zerobase.mission.type.Role;
 
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CustomerControllerTest.class)
+@WebMvcTest(CustomerController.class)
 class CustomerControllerTest {
 
     @MockBean
@@ -38,15 +38,15 @@ class CustomerControllerTest {
     void success_signup_customer() throws Exception {
         // given
         Customer customer = Customer.builder()
-                .userId("pororo123")
+                .loginId("pororo123")
                 .password("1234")
                 .name("pororo")
                 .phoneNumber("01011112222")
                 .build();
 
-        given(customerService.customerSignup(any())).willReturn(
+        given(customerService.signupCustomer(any())).willReturn(
                 CustomerDto.builder()
-                        .userId(customer.getUserId())
+                        .loginId(customer.getLoginId())
                         .name(customer.getName())
                         .role(Role.CUSTOMER)
                         .build());
@@ -56,11 +56,11 @@ class CustomerControllerTest {
         mockMvc.perform(post("/signup/customer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(
-                                new CustomerSignupDto.Request("pororo123", "1234", "pororo", "01011112222")
+                                new SignupCustomerDto.Request("pororo123", "1234", "pororo", "01011112222")
                         )))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId").value("pororo123"))
+                .andExpect(jsonPath("$.loginId").value("pororo123"))
                 .andExpect(jsonPath("$.name").value("pororo"))
                 .andExpect(jsonPath("$.role").value("CUSTOMER"));
     }

@@ -2,7 +2,7 @@ POST http://localhost:8080/signup/customer
 Content-Type: application/json
 
 {
-  "userId": "pororo123",
+  "loginId": "pororo123",
   "password": "1234",
   "name": "proro",
   "mobileNumber": "01011112222"

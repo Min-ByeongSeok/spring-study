@@ -10,13 +10,13 @@ import zerobase.mission.type.Role;
 @AllArgsConstructor
 @Builder
 public class CustomerDto {
-    private String userId;
+    private String loginId;
     private String name;
     private Role role;
 
     public static CustomerDto fromEntity(Customer customer) {
         return CustomerDto.builder()
-                .userId(customer.getUserId())
+                .loginId(customer.getLoginId())
                 .name(customer.getName())
                 .role(Role.CUSTOMER)
                 .build();

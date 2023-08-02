@@ -6,7 +6,7 @@ import zerobase.mission.type.Role;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class CustomerSignupDto {
+public class SignupCustomerDto {
     @Getter
     @Setter
     @NoArgsConstructor
@@ -14,11 +14,11 @@ public class CustomerSignupDto {
     @Builder
     public static class Request {
         @NotBlank
-        private String userId;
+        private String name;
+        @NotBlank
+        private String loginId;
         @NotBlank
         private String password;
-        @NotBlank
-        private String name;
 
         @Size(min = 11, max = 11)
         private String mobileNumber;
@@ -30,14 +30,14 @@ public class CustomerSignupDto {
     @AllArgsConstructor
     @Builder
     public static class Response {
-        private String userId;
         private String name;
+        private String loginId;
         private Role role;
 
         public static Response fromDto(CustomerDto customerDto) {
             return Response.builder()
                     .name(customerDto.getName())
-                    .userId(customerDto.getUserId())
+                    .loginId(customerDto.getLoginId())
                     .role(customerDto.getRole())
                     .build();
         }

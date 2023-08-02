@@ -1,21 +1,24 @@
 package zerobase.mission.domain.member;
 
 import lombok.*;
+import zerobase.mission.domain.Store;
 import zerobase.mission.type.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer{
+@Entity
+public class Manager {
     @Id
     @GeneratedValue
+    @Column(name = "manager_id")
     private Long id;
 
     @NotBlank
@@ -30,7 +33,7 @@ public class Customer{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @NotBlank
-    @Size(min = 11, max = 11)
-    private String phoneNumber;
+    @OneToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
 }

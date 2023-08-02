@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import zerobase.mission.domain.member.Customer;
 import zerobase.mission.dto.CustomerDto;
-import zerobase.mission.dto.CustomerSignupDto;
+import zerobase.mission.dto.SignupCustomerDto;
 import zerobase.mission.service.CustomerService;
 import zerobase.mission.type.Role;
 
@@ -18,16 +18,16 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/signup/customer")
-    public CustomerSignupDto.Response CustomerSignup(@RequestBody @Valid CustomerSignupDto.Request request) {
+    public SignupCustomerDto.Response CustomerSignup(@RequestBody @Valid SignupCustomerDto.Request request) {
 
-        CustomerDto customerDto = customerService.customerSignup(Customer.builder()
-                .userId(request.getUserId())
+        CustomerDto customerDto = customerService.signupCustomer(Customer.builder()
+                .loginId(request.getLoginId())
                 .password(request.getPassword())
                 .name(request.getName())
                 .role(Role.CUSTOMER)
                 .phoneNumber(request.getMobileNumber())
                 .build());
 
-        return CustomerSignupDto.Response.fromDto(customerDto);
+        return SignupCustomerDto.Response.fromDto(customerDto);
     }
 }

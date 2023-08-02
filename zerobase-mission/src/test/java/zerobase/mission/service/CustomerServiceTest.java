@@ -13,7 +13,8 @@ import zerobase.mission.repository.CustomerRepository;
 import zerobase.mission.type.ErrorCode;
 import zerobase.mission.type.Role;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -32,41 +33,40 @@ class CustomerServiceTest {
     void success_signup_customer() {
         // given
         Customer customer = Customer.builder()
-                .userId("pororo123")
+                .loginId("pororo123")
                 .phoneNumber("1234")
                 .name("pororo")
                 .phoneNumber("01011112222")
                 .build();
 
-        given(customerRepository.existsByUserId(anyString())).willReturn(false);
+        given(customerRepository.existsByLoginId(anyString())).willReturn(false);
         given(customerRepository.save(any())).willReturn(customer);
 
         // when
-        CustomerDto customerDto = customerService.customerSignup(customer);
+        CustomerDto customerDto = customerService.signupCustomer(customer);
 
         // then
         assertEquals(Role.CUSTOMER, customerDto.getRole());
-        assertEquals("pororo123", customerDto.getUserId());
+        assertEquals("pororo123", customerDto.getLoginId());
         assertEquals("pororo", customerDto.getName());
     }
 
     @Test
     @DisplayName("고객 회원가입 실패 - 중복된 ID")
-    void fail_signup_customer_already_exist_userId() {
+    void fail_signup_customer_already_exist_loginId() {
         // given
         Customer customer = Customer.builder()
-                .userId("pororo123")
+                .loginId("pororo123")
                 .phoneNumber("1234")
                 .name("pororo")
                 .phoneNumber("01011112222")
                 .build();
 
-        given(customerRepository.existsByUserId(anyString())).willReturn(true);
+        given(customerRepository.existsByLoginId(anyString())).willReturn(true);
 
-        CustomException exception = assertThrows(CustomException.class, () -> customerService.customerSignup(customer));
+        CustomException exception = assertThrows(CustomException.class, () -> customerService.signupCustomer(customer));
 
-        assertEquals(ErrorCode.ALREADY_EXIST_USER_ID, exception.getErrorCode());
+        assertEquals(ErrorCode.ALREADY_EXIST_LOGIN_ID, exception.getErrorCode());
     }
-
 
 }

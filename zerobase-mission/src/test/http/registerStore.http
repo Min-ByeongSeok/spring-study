@@ -1,0 +1,17 @@
+POST http://localhost:8080/register/store
+Content-Type: application/json
+
+{
+  "name": "crongStore",
+  "address": {
+    "city": "bbo-rong",
+    "street": "bbo-rong",
+    "zipcode": "123"
+  },
+  "description": "hi this is crong's store",
+  "openTime": "09:00:00",
+  "closeTime": "18:00:00"
+}
+
+
+###
