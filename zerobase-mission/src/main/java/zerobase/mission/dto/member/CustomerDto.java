@@ -1,4 +1,4 @@
-package zerobase.mission.dto;
+package zerobase.mission.dto.member;
 
 import lombok.*;
 import zerobase.mission.domain.member.Customer;

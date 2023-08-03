@@ -8,7 +8,7 @@ Content-Type: application/json
     "street": "bbo-rong",
     "zipcode": "123"
   },
-  "description": "hi this is crong's store",
+  "description": "hi this is crongStore",
   "openTime": "09:00:00",
   "closeTime": "18:00:00"
 }

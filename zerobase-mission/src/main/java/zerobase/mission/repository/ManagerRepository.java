@@ -8,5 +8,4 @@ import zerobase.mission.domain.member.Manager;
 @Repository
 public interface ManagerRepository extends JpaRepository<Manager, Long> {
     boolean existsByLoginId(String loginId);
-    boolean existsByNameAndAddress(String name, Address address);
 }

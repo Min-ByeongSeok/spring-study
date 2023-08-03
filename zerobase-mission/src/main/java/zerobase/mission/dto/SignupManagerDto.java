@@ -1,13 +1,14 @@
 package zerobase.mission.dto;
 
 import lombok.*;
-import zerobase.mission.dto.member.CustomerDto;
+import zerobase.mission.domain.Address;
+import zerobase.mission.dto.member.ManagerDto;
 import zerobase.mission.type.Role;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
-public class SignupCustomerDto {
+public class SignupManagerDto {
     @Getter
     @Setter
     @NoArgsConstructor
@@ -20,9 +21,10 @@ public class SignupCustomerDto {
         private String loginId;
         @NotBlank
         private String password;
+        @NotBlank
+        private String storeName;
 
-        @Size(min = 11, max = 11)
-        private String mobileNumber;
+        private Address address;
     }
 
     @Getter
@@ -34,12 +36,14 @@ public class SignupCustomerDto {
         private String name;
         private String loginId;
         private Role role;
+        private String storeName;
 
-        public static Response fromDto(CustomerDto customerDto) {
+        public static Response fromDto(ManagerDto managerDto) {
             return Response.builder()
-                    .name(customerDto.getName())
-                    .loginId(customerDto.getLoginId())
-                    .role(customerDto.getRole())
+                    .name(managerDto.getName())
+                    .loginId(managerDto.getLoginId())
+                    .role(managerDto.getRole())
+                    .storeName(managerDto.getStoreName())
                     .build();
         }
     }

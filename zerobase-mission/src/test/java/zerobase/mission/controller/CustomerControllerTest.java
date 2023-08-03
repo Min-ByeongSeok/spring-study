@@ -8,11 +8,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import zerobase.mission.domain.Address;
+import zerobase.mission.domain.Store;
 import zerobase.mission.domain.member.Customer;
-import zerobase.mission.dto.CustomerDto;
+import zerobase.mission.domain.member.Manager;
+import zerobase.mission.dto.SignupManagerDto;
+import zerobase.mission.dto.member.CustomerDto;
 import zerobase.mission.dto.SignupCustomerDto;
+import zerobase.mission.dto.member.ManagerDto;
+import zerobase.mission.repository.RegisterStoreRepository;
 import zerobase.mission.service.CustomerService;
+import zerobase.mission.service.ManagerService;
 import zerobase.mission.type.Role;
+
+import java.time.LocalTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -29,7 +38,6 @@ class CustomerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -56,8 +64,12 @@ class CustomerControllerTest {
         mockMvc.perform(post("/signup/customer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(
-                                new SignupCustomerDto.Request("pororo123", "1234", "pororo", "01011112222")
-                        )))
+                                new SignupCustomerDto.Request(
+                                        "pororo",
+                                        "pororo123",
+                                        "1234",
+                                        "01011112222"
+                                ))))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.loginId").value("pororo123"))

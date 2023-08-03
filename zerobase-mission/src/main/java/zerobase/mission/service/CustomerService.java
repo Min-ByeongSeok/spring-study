@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zerobase.mission.domain.member.Customer;
-import zerobase.mission.dto.CustomerDto;
+import zerobase.mission.dto.member.CustomerDto;
 import zerobase.mission.exception.CustomException;
 import zerobase.mission.repository.CustomerRepository;
 

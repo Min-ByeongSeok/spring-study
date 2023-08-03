@@ -3,6 +3,7 @@ package zerobase.mission.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import zerobase.mission.domain.Address;
 import zerobase.mission.domain.Store;
 import zerobase.mission.dto.StoreDto;
 import zerobase.mission.exception.CustomException;
@@ -24,5 +25,14 @@ public class RegisterStoreService {
         }
 
         return StoreDto.fromEntity(registerStoreRepository.save(store));
+    }
+
+    @Transactional(readOnly = true)
+    public Store findRegisteredStore(String name, Address address) {
+        Store findStore = registerStoreRepository.findByNameAndAddress(name, address).orElseThrow(
+                () -> new CustomException(ErrorCode.NOT_REGISTERED_STORE)
+        );
+
+        return findStore;
     }
 }

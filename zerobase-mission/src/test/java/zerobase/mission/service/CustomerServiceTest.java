@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import zerobase.mission.domain.member.Customer;
-import zerobase.mission.dto.CustomerDto;
+import zerobase.mission.dto.member.CustomerDto;
 import zerobase.mission.exception.CustomException;
 import zerobase.mission.repository.CustomerRepository;
 import zerobase.mission.type.ErrorCode;

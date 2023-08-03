@@ -3,18 +3,11 @@ package zerobase.mission.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zerobase.mission.domain.Store;
-import zerobase.mission.domain.member.Customer;
 import zerobase.mission.domain.member.Manager;
-import zerobase.mission.dto.CustomerDto;
-import zerobase.mission.dto.ManagerDto;
+import zerobase.mission.dto.member.ManagerDto;
 import zerobase.mission.exception.CustomException;
-import zerobase.mission.repository.CustomerRepository;
 import zerobase.mission.repository.ManagerRepository;
 import zerobase.mission.repository.RegisterStoreRepository;
-import zerobase.mission.type.ErrorCode;
-
-import java.util.Optional;
 
 import static zerobase.mission.type.ErrorCode.ALREADY_EXIST_LOGIN_ID;
 import static zerobase.mission.type.ErrorCode.NOT_REGISTERED_STORE;
