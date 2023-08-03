@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Manager {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "manager_id")
     private Long id;
 

@@ -6,6 +6,7 @@ import zerobase.mission.domain.member.Manager;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ import java.time.LocalTime;
 @Entity
 public class Store {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
     private Long id;
 

@@ -23,7 +23,7 @@ public class ManagerService {
         boolean isExistLoginId
                 = managerRepository.existsByLoginId(manager.getLoginId());
         boolean isExistRegisteredStore
-                = registerStoreRepository.existsByNameAndAddress(manager.getName(), manager.getStore().getAddress());
+                = registerStoreRepository.existsByNameAndAddress(manager.getStore().getName(), manager.getStore().getAddress());
 
         if (isExistLoginId) {
             throw new CustomException(ALREADY_EXIST_LOGIN_ID);

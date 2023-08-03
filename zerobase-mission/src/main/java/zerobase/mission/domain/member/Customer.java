@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Builder
 public class Customer{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank

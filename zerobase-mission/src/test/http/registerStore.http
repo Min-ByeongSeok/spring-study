@@ -1,3 +1,7 @@
+GET http://localhost:8080/storelist
+Accept: application/json
+
+###
 POST http://localhost:8080/register/store
 Content-Type: application/json
 
@@ -13,5 +17,18 @@ Content-Type: application/json
   "closeTime": "18:00:00"
 }
 
-
 ###
+POST http://localhost:8080/register/store
+Content-Type: application/json
+
+{
+  "name": "busanStore",
+  "address": {
+    "city": "busan",
+    "street": "buk-gu",
+    "zipcode": "051"
+  },
+  "description": "hi this is busanStore",
+  "openTime": "09:00:00",
+  "closeTime": "18:00:00"
+}

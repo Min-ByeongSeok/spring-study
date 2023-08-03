@@ -20,5 +20,4 @@ public class StoreDto {
                 .isRegistered(true)
                 .build();
     }
-
 }

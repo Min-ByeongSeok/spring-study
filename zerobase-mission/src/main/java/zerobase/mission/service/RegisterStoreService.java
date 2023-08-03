@@ -20,7 +20,7 @@ public class RegisterStoreService {
     public StoreDto registerStore(Store store) {
         boolean isRegistered = registerStoreRepository.existsByNameAndAddress(store.getName(), store.getAddress());
 
-        if(isRegistered){
+        if (isRegistered) {
             throw new CustomException(ErrorCode.ALREADY_REGISTERED_STORE);
         }
 
@@ -29,10 +29,7 @@ public class RegisterStoreService {
 
     @Transactional(readOnly = true)
     public Store findRegisteredStore(String name, Address address) {
-        Store findStore = registerStoreRepository.findByNameAndAddress(name, address).orElseThrow(
-                () -> new CustomException(ErrorCode.NOT_REGISTERED_STORE)
-        );
-
-        return findStore;
+        return registerStoreRepository.findByNameAndAddress(name, address)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_REGISTERED_STORE));
     }
 }

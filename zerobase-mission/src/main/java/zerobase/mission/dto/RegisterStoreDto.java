@@ -5,6 +5,7 @@ import zerobase.mission.domain.Address;
 import zerobase.mission.type.Role;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,7 +17,9 @@ public class RegisterStoreDto {
     @AllArgsConstructor
     @Builder
     public static class Request {
+        @NotBlank
         private String name;
+        @NotNull
         private Address address;
         private String description;
         private LocalTime openTime;
