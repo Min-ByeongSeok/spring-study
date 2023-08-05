@@ -8,20 +8,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import zerobase.mission.domain.Address;
-import zerobase.mission.domain.Store;
 import zerobase.mission.domain.member.Customer;
-import zerobase.mission.domain.member.Manager;
-import zerobase.mission.dto.SignupManagerDto;
 import zerobase.mission.dto.member.CustomerDto;
 import zerobase.mission.dto.SignupCustomerDto;
-import zerobase.mission.dto.member.ManagerDto;
-import zerobase.mission.repository.RegisterStoreRepository;
 import zerobase.mission.service.CustomerService;
-import zerobase.mission.service.ManagerService;
 import zerobase.mission.type.Role;
-
-import java.time.LocalTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;

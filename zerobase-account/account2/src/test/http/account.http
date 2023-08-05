@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "initialBalance": 1000
+  "initialBalance": 1000000
 }
 
 ###
@@ -18,5 +18,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/account?user_id=14
+GET http://localhost:8080/account?user_id=1
 Content-Type: application/json

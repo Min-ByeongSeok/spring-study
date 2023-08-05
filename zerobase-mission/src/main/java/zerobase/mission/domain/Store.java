@@ -4,6 +4,8 @@ import lombok.*;
 import zerobase.mission.domain.member.Manager;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalTime;
 import java.util.List;
@@ -30,4 +32,12 @@ public class Store {
 
     private LocalTime openTime;
     private LocalTime closeTime;
+
+    @Column(name = "thumbs_up")
+    public int thumbsUp;
+
+    @OneToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
+
 }

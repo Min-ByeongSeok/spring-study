@@ -12,7 +12,7 @@ import zerobase.mission.domain.member.Manager;
 import zerobase.mission.dto.member.ManagerDto;
 import zerobase.mission.exception.CustomException;
 import zerobase.mission.repository.ManagerRepository;
-import zerobase.mission.repository.RegisterStoreRepository;
+import zerobase.mission.repository.RegisterRepository;
 import zerobase.mission.type.ErrorCode;
 import zerobase.mission.type.Role;
 
@@ -30,12 +30,12 @@ class ManagerServiceTest {
     @Mock
     private ManagerRepository managerRepository;
     @Mock
-    private RegisterStoreRepository registerStoreRepository;
+    private RegisterRepository registerRepository;
 
     @InjectMocks
     private ManagerService managerService;
     @InjectMocks
-    private RegisterStoreService registerStoreService;
+    private RegisterService registerService;
 
     @Test
     @DisplayName("점장 회원가입 성공")
@@ -61,7 +61,7 @@ class ManagerServiceTest {
                 .build();
 
         given(managerRepository.existsByLoginId(anyString())).willReturn(false);
-        given(registerStoreRepository.existsByNameAndAddress(anyString(), any())).willReturn(true);
+        given(registerRepository.existsByNameAndAddress(anyString(), any())).willReturn(true);
         given(managerRepository.save(any())).willReturn(manager);
 
         // when
@@ -126,7 +126,7 @@ class ManagerServiceTest {
                 .build();
 
         given(managerRepository.existsByLoginId(anyString())).willReturn(false);
-        given(registerStoreRepository.existsByNameAndAddress(anyString(), any())).willReturn(false);
+        given(registerRepository.existsByNameAndAddress(anyString(), any())).willReturn(false);
         // when
         CustomException exception = assertThrows(CustomException.class, () -> managerService.signupManager(manager));
         // then

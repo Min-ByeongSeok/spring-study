@@ -10,9 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import zerobase.mission.domain.Address;
 import zerobase.mission.domain.Store;
-import zerobase.mission.dto.RegisterStoreDto;
+import zerobase.mission.dto.RegisterDto;
 import zerobase.mission.dto.StoreDto;
-import zerobase.mission.service.RegisterStoreService;
+import zerobase.mission.service.RegisterService;
 
 import java.time.LocalTime;
 
@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class RegisterControllerTest {
 
     @MockBean
-    private RegisterStoreService registerStoreService;
+    private RegisterService registerService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -54,7 +54,7 @@ class RegisterControllerTest {
                 .closeTime(LocalTime.of(18, 0, 0))
                 .build();
 
-        given(registerStoreService.registerStore(any())).willReturn(
+        given(registerService.register(any())).willReturn(
                 StoreDto.builder()
                         .name(crongStore.getName())
                         .isRegistered(true)
@@ -64,7 +64,7 @@ class RegisterControllerTest {
         mockMvc.perform(post("/register/store")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(
-                                new RegisterStoreDto.Request(
+                                new RegisterDto.Request(
                                         "crongStore",
                                         address,
                                         "hi this is crong's store",

@@ -1,6 +1,7 @@
 package zerobase.mission.dto;
 
 import lombok.*;
+import org.springframework.data.domain.Page;
 import zerobase.mission.domain.Store;
 
 import java.util.UUID;

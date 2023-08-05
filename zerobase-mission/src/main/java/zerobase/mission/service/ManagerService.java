@@ -7,7 +7,7 @@ import zerobase.mission.domain.member.Manager;
 import zerobase.mission.dto.member.ManagerDto;
 import zerobase.mission.exception.CustomException;
 import zerobase.mission.repository.ManagerRepository;
-import zerobase.mission.repository.RegisterStoreRepository;
+import zerobase.mission.repository.RegisterRepository;
 
 import static zerobase.mission.type.ErrorCode.ALREADY_EXIST_LOGIN_ID;
 import static zerobase.mission.type.ErrorCode.NOT_REGISTERED_STORE;
@@ -16,14 +16,14 @@ import static zerobase.mission.type.ErrorCode.NOT_REGISTERED_STORE;
 @RequiredArgsConstructor
 public class ManagerService {
     private final ManagerRepository managerRepository;
-    private final RegisterStoreRepository registerStoreRepository;
+    private final RegisterRepository registerRepository;
 
     @Transactional
     public ManagerDto signupManager(Manager manager) {
         boolean isExistLoginId
                 = managerRepository.existsByLoginId(manager.getLoginId());
         boolean isExistRegisteredStore
-                = registerStoreRepository.existsByNameAndAddress(manager.getStore().getName(), manager.getStore().getAddress());
+                = registerRepository.existsByNameAndAddress(manager.getStore().getName(), manager.getStore().getAddress());
 
         if (isExistLoginId) {
             throw new CustomException(ALREADY_EXIST_LOGIN_ID);

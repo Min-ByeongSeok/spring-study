@@ -1,7 +1,4 @@
-GET http://localhost:8080/storelist
-Accept: application/json
-
-###
+### 매장 등록 (정상)
 POST http://localhost:8080/register/store
 Content-Type: application/json
 
@@ -17,7 +14,7 @@ Content-Type: application/json
   "closeTime": "18:00:00"
 }
 
-###
+### 매장 등록 (중복 매장)
 POST http://localhost:8080/register/store
 Content-Type: application/json
 

@@ -34,7 +34,7 @@ public class TransactionController {
                 = transactionService.useBalance(request.getUserId(), request.getAccountNumber(), request.getAmount());
 
         try {
-            Thread.sleep(3000L);
+//            Thread.sleep(3000L);
             return UseBalance.Response.fromDto(transactionDto);
         } catch (AccountException e) {
             log.error("Failed to use balance.");

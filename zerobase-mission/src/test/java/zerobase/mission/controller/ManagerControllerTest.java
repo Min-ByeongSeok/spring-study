@@ -14,7 +14,7 @@ import zerobase.mission.domain.member.Manager;
 import zerobase.mission.dto.SignupManagerDto;
 import zerobase.mission.dto.member.ManagerDto;
 import zerobase.mission.service.ManagerService;
-import zerobase.mission.service.RegisterStoreService;
+import zerobase.mission.service.RegisterService;
 import zerobase.mission.type.Role;
 
 import java.time.LocalTime;
@@ -34,7 +34,7 @@ class ManagerControllerTest {
     //    @MockBean
 //    private RegisterStoreRepository registerStoreRepository;
     @MockBean
-    private RegisterStoreService registerStoreService;
+    private RegisterService registerService;
 
 
     @Autowired

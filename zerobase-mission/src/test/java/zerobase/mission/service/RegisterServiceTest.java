@@ -10,7 +10,7 @@ import zerobase.mission.domain.Address;
 import zerobase.mission.domain.Store;
 import zerobase.mission.dto.StoreDto;
 import zerobase.mission.exception.CustomException;
-import zerobase.mission.repository.RegisterStoreRepository;
+import zerobase.mission.repository.RegisterRepository;
 import zerobase.mission.type.ErrorCode;
 
 import java.time.LocalTime;
@@ -21,13 +21,13 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-class RegisterStoreServiceTest {
+class RegisterServiceTest {
 
     @Mock
-    RegisterStoreRepository registerStoreRepository;
+    RegisterRepository registerRepository;
 
     @InjectMocks
-    RegisterStoreService registerStoreService;
+    RegisterService registerService;
 
     @Test
     @DisplayName("매장 등록 성공")
@@ -45,10 +45,10 @@ class RegisterStoreServiceTest {
                 .closeTime(LocalTime.of(18, 0, 0))
                 .build();
 
-        given(registerStoreRepository.existsByNameAndAddress(anyString(), any())).willReturn(false);
-        given(registerStoreRepository.save(any())).willReturn(crongStore);
+        given(registerRepository.existsByNameAndAddress(anyString(), any())).willReturn(false);
+        given(registerRepository.save(any())).willReturn(crongStore);
         // when
-        StoreDto registeredStore = registerStoreService.registerStore(crongStore);
+        StoreDto registeredStore = registerService.register(crongStore);
         // then
         assertEquals("crongStore", registeredStore.getName());
     }
@@ -69,9 +69,9 @@ class RegisterStoreServiceTest {
                 .closeTime(LocalTime.of(18, 0, 0))
                 .build();
 
-        given(registerStoreRepository.existsByNameAndAddress(anyString(), any())).willReturn(true);
+        given(registerRepository.existsByNameAndAddress(anyString(), any())).willReturn(true);
         // when
-        CustomException exception = assertThrows(CustomException.class, () -> registerStoreService.registerStore(crongStore));
+        CustomException exception = assertThrows(CustomException.class, () -> registerService.register(crongStore));
         // then
         assertEquals(ErrorCode.ALREADY_REGISTERED_STORE, exception.getErrorCode());
     }
