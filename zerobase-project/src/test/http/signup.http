@@ -1,0 +1,29 @@
+### 고객 회원 가입
+POST http://localhost:8080/register/customer
+Content-Type: application/json
+
+{
+  "userId": "ctm123",
+  "password": "0000",
+  "name": "hi"
+}
+
+### 점장 회원 가입1
+POST http://localhost:8080/register/manager
+Content-Type: application/json
+
+{
+  "userId": "mng123",
+  "password": "0000",
+  "name": "hello"
+}
+
+### 점장 회원 가입2
+POST http://localhost:8080/register/manager
+Content-Type: application/json
+
+{
+  "userId": "abc123",
+  "password": "0000",
+  "name": "qwerasdf"
+}

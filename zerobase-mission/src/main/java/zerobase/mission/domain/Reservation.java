@@ -1,10 +1,13 @@
 package zerobase.mission.domain;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import zerobase.mission.type.Availability;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
+import static zerobase.mission.type.Availability.AVAILABLE;
 
 
 @Getter
@@ -18,7 +21,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "reservation")
+    @OneToOne(mappedBy = "reservation", fetch = FetchType.LAZY)
     private Store store;
 
     private LocalDate date;

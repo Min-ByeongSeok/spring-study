@@ -1,0 +1,13 @@
+POST http://localhost:8080/reserve
+Content-Type: application/json
+
+{
+  "storeName": "helloStore",
+  "customer": {
+    "userId": "ctm123",
+    "password": "0000"
+  },
+  "headCount": 1
+}
+
+###

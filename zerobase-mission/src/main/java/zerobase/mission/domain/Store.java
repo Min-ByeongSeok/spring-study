@@ -1,6 +1,7 @@
 package zerobase.mission.domain;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 import zerobase.mission.domain.member.Manager;
 
 import javax.persistence.*;
@@ -36,8 +37,7 @@ public class Store {
     @Column(name = "thumbs_up")
     public int thumbsUp;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
-
 }
