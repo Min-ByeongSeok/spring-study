@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import toyproject.demo.domain.Kiosk;
 import toyproject.demo.domain.Member;
 import toyproject.demo.domain.Store;
 import toyproject.demo.dto.Register;
@@ -25,6 +26,7 @@ public class RegisterController {
         registerService.register(Store.builder()
                 .storeInfo(request.getStoreInfo())
                 .manager(manager)
+                .kiosk(Kiosk.builder().build())
                 .build());
 
         registerService.addAutocompleteKeyword(request.getStoreInfo().getName());

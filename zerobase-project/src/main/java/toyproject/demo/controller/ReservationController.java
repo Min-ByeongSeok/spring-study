@@ -53,6 +53,7 @@ public class ReservationController {
                 .customerName(customer.getName())
                 .headCount(request.getHeadCount())
                 .uuid(UUID.randomUUID().toString().replace("-", ""))
+                .dateTime(request.getDateTime())
                 .build());
 
         return Reserve.Response.fromDto(reservationDto);

@@ -21,7 +21,12 @@ public class Store {
     @Embedded
     private StoreInfo storeInfo;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member manager;
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "kiost_id")
+    private Kiosk kiosk;
 }

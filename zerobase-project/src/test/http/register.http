@@ -1,4 +1,4 @@
-### 매장 등록1
+### 매장 등록(1)
 POST http://localhost:8080/register/store
 Content-Type: application/json
 
@@ -14,7 +14,7 @@ Content-Type: application/json
   "managerId": "mng123"
 }
 
-### 매장 등록2
+### 매장 등록(2)
 POST http://localhost:8080/register/store
 Content-Type: application/json
 
@@ -35,5 +35,5 @@ GET http://localhost:8080/store
 Content-Type: application/json
 
 ### 자동완성 매장 찾기
-GET http://localhost:8080/search/store?name=hel
+GET http://localhost:8080/search/store?name=ron
 Content-Type: application/json

@@ -1,11 +1,13 @@
 package toyproject.demo.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import toyproject.demo.domain.Member;
-import toyproject.demo.domain.embedded.StoreInfo;
 
 import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Reserve {
     @Getter
@@ -18,6 +20,8 @@ public class Reserve {
         private Member customer;
         @Min(1)
         private int headCount;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime dateTime;
     }
 
     @Getter
@@ -30,12 +34,13 @@ public class Reserve {
 
         public static Response fromDto(ReservationDto reservationDto) {
             return Response.builder()
-                    .message(String.format("%s님 %s %d명 예약되셨습니다.",
-                            reservationDto.getCustomerName(),
-                            reservationDto.getStore().getStoreInfo().getName(),
-                            reservationDto.getHeadCount()) +
-                            String.format("예약번호는 %s입니다.",
-                            reservationDto.getUuid()))
+                    .message(
+                            String.format("%s님 %s %s %d명 예약되었습니다. 예약번호는 %s 입니다",
+                                    reservationDto.getCustomerName(),
+                                    reservationDto.getDateTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+                                    reservationDto.getStore().getStoreInfo().getName(),
+                                    reservationDto.getHeadCount(),
+                                    reservationDto.getUuid()))
                     .build();
         }
     }
