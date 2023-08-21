@@ -1,9 +1,0 @@
-### 전체 매장 찾기
-
-GET http://localhost:8080/store
-Accept: application/json
-
-###
-
-GET http://localhost:8080/store/crongStore
-Accept: application/json
