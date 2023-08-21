@@ -1,0 +1,26 @@
+POST http://localhost:8080/signup/customer
+Content-Type: application/json
+
+{
+  "name": "proro",
+  "loginId": "pororo123",
+  "password": "1234",
+  "mobileNumber": "01011112222"
+}
+
+###
+
+POST http://localhost:8080/signup/manager
+Content-Type: application/json
+
+{
+  "name": "crong",
+  "loginId": "crong123",
+  "password": "1234",
+  "storeName": "busanStore",
+  "address": {
+    "city": "busan",
+    "street": "buk-gu",
+    "zipcode": "051"
+  }
+}
